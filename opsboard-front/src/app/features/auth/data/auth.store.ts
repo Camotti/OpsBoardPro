@@ -27,8 +27,8 @@ export const AuthStore = signalStore(
             store.patchState({
                 user: null,
                 tokens: null,
-                loaing: false,
+                loaing: true, // cambiar a false
             });
         },
     }))
-);
+); // hola mundo 
