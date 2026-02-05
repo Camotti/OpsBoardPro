@@ -1,10 +1,10 @@
-import { signalStore, withState, withMethods } from "@ngrx/signals";
-import { AuthUser, AuthTokens } from "../models";
+import { signalStore, withState, withMethods, patchState } from "@ngrx/signals";
+import { AuthUser, AuthToken } from "../models";
 
 interface AuthState 
 {
     user: AuthUser | null;
-    tokens: AuthTokens | null;
+    tokens: AuthToken | null;
     loading: boolean;
 }
 
@@ -16,14 +16,19 @@ export const AuthStore = signalStore(
         loading: false,
     }),
     withMethods((store) => ({
-        loginSuccess(user: AuthUser, tokens: AuthTokens) {
-            store.user.set(user);
-            store.tokens.set(tokens);
-            store.loading.set(false);
+        loginSuccess(user: AuthUser, tokens: AuthToken) {
+            store.patchState({
+                user,
+                tokens,
+                loading: false,
+            });
         },
         logout(){
-            store.user.set(null);
-            store.tokens.set(null);
+            store.patchState({
+                user: null,
+                tokens: null,
+                loaing: false,
+            });
         },
     }))
 );

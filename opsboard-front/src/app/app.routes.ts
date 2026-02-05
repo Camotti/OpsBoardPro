@@ -9,17 +9,10 @@ export const routes: Routes = [
         component: AppShellComponent,
         children: [
             {
-                path: '',
-                redirectTo: 'dashboard',
-                pathMatch: 'full',
-            },
-
-            {
                 path: 'dashboard',
-                loadChildren: ()=> 
-                    import('./features/dashboard/pages/dashboard.routes').then( 
-                        (m) => m.DASHBOARD_ROUTES
-                    ),
+                loadChildren: () =>
+                import('./features/dashboard/dashboard.routes')
+                    .then(m => m.dashboardRoutes),
             },
 
             {
