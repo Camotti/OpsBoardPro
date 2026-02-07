@@ -1,6 +1,7 @@
 import { Component,inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthFacade } from '../../data/auth.facade';
+import { Router } from '@angular/router';
 @Component({
   standalone: true,
   selector: 'app-login-page',
@@ -12,11 +13,16 @@ import { AuthFacade } from '../../data/auth.facade';
 })
 export class LoginPage {
   private auth = inject(AuthFacade)
+  private router= inject(Router)
 
   login(){
     this.auth.login({
       username: 'admin',
       password: 'admin',
     });
+
+    this.router.navigate(['/dashboard']);
   }
 }
+
+
