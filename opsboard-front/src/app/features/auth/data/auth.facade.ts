@@ -1,10 +1,12 @@
 import { inject, Injectable } from '@angular/core';
 import { AuthStore } from './auth.store';
 import { LoginRequestDto } from '../models';
+import {Router} from '@angular/router'
 
 @Injectable({ providedIn: 'root' })
 export class AuthFacade {
   private store = inject(AuthStore);
+  private router = inject(Router);
 
   user$ = this.store.user;
   tokens$ = this.store.tokens;
@@ -28,6 +30,7 @@ export class AuthFacade {
 
   logout() {
     this.store.logout();
+    this.router.navigate(['/auth/login'])
   }
 
   isAuthenticated(): boolean {

@@ -17,18 +17,18 @@ export const AuthStore = signalStore(
     }),
     withMethods((store) => ({
         loginSuccess(user: AuthUser, tokens: AuthToken) {
-            store.patchState({
+            patchState(store,{
                 user,
                 tokens,
                 loading: false,
             });
         },
         logout(){
-            store.patchState({
+            patchState(store,{
                 user: null,
                 tokens: null,
-                loaing: true, // cambiar a false
+                loading: false, 
             });
         },
     }))
-); // hola mundo 
+); 
