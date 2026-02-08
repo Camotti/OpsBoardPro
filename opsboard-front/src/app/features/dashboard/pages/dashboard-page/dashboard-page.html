@@ -1,3 +1,10 @@
-<h1>{{title}}</h1>
-<p>Welcome to OpsBoard Pro - Dashboard</p>
+<h1>Dashboard</h1>
 
+<div *ngIf="loading$()">Cargando KPIs...</div>
+
+<div *ngIf="kpis$() as kpis">
+  <p>Incidentes abiertos: {{ kpis.openIncidents }}</p>
+  <p>En progreso: {{ kpis.inProgressIncidents }}</p>
+  <p>Resueltos hoy: {{ kpis.resolvedToday }}</p>
+  <p>SLA violados: {{ kpis.slaBreached }}</p>
+</div>
