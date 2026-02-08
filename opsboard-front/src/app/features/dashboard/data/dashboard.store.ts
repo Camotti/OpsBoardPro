@@ -14,11 +14,10 @@ export const DashboardStore = signalStore(
     loading: false,
   }),
 
-  withMethods((store) => ({
+  withMethods((store: any) => ({
     loadKpis() {
       store.loading.set(true);
 
-      // simulación async
       setTimeout(() => {
         store.kpis.set({
           openIncidents: 12,
