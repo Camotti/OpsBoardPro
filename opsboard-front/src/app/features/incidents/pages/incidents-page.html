@@ -1,0 +1,12 @@
+<h1>Incidents</h1>
+
+<div *ngIf="loading$()">Cargando incidentes...</div>
+
+<ul *ngIf="incidents$() as incidents">
+  <li *ngFor="let inc of incidents">
+    <strong>{{ inc.id }}</strong> —
+    {{ inc.title }} —
+    {{ inc.status }} —
+    {{ inc.severity }}
+  </li>
+</ul>
