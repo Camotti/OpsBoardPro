@@ -28,4 +28,18 @@ export const routes: Routes = [
     path: '**',
     redirectTo: 'dashboard',
   },
+
+    {
+    path: 'admin',
+    loadChildren: () =>
+      import('./features/admin/admin.routes').then(m => m.adminRoutes),
+  },
+
+  {
+    path: 'audit',
+    loadChildren: () =>
+      import('./features/audit/audit.routes').then(m => m.auditRoutes),
+  },
+
+      
 ];
