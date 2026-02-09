@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IncidentsFacade } from '../../data/incidents.facade';
+import { IncidentsFacade } from '../data/incidents.facade';
 
 @Component({
   standalone: true,

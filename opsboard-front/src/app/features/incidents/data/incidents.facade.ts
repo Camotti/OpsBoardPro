@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { IncidentsStore } from './incident.store';
+import { IncidentsStore } from './incidents.store';
 
 @Injectable({ providedIn: 'root' })
 export class IncidentsFacade {

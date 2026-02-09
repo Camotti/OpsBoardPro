@@ -4,7 +4,7 @@ export const incidentsRoutes: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./pages/incidents-page/incidents-page')
+      import('./pages/incidents-page')
         .then(m => m.IncidentsPage),
   },
 ];
