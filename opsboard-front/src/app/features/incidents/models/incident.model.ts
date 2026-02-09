@@ -1,4 +1,5 @@
-export type IncidentStatus = 'OPEN' | 'IN_PROGRESS' | 'RESOLVED';
+
+ export type IncidentStatus = 'OPEN' | 'IN_PROGRESS' | 'RESOLVED';
 
 export interface Incident {
   id: string;

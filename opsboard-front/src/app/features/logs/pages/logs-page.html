@@ -1,0 +1,7 @@
+<h1>Logs Explorer</h1>
+
+<ul>
+  <li *ngFor="let log of logs$()">
+    [{{ log.level }}] {{ log.message }} – {{ log.timestamp }}
+  </li>
+</ul>

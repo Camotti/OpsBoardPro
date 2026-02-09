@@ -1,0 +1,11 @@
+<h1>Deployments</h1>
+
+<div *ngIf="loading$()">Cargando deployments...</div>
+
+<ul *ngIf="deployments$() as deployments">
+  <li *ngFor="let d of deployments">
+    <strong>{{ d.service }}</strong>
+    — {{ d.version }}
+    — <em>{{ d.status }}</em>
+  </li>
+</ul>
