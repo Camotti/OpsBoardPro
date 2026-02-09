@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LogsFacade } from '../../data/logs.facade';
+import { LogsFacade } from '../data/logs.facade';
 
 @Component({
   standalone: true,

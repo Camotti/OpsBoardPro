@@ -1,4 +1,4 @@
-import { signalStore, withState, withMethods } from '@ngrx/signals';
+import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { LogEntry } from '../models/log-entry.model';
 
 interface LogsState {
@@ -8,31 +8,53 @@ interface LogsState {
 
 export const LogsStore = signalStore(
   { providedIn: 'root' },
+
   withState<LogsState>({
     logs: [],
     streaming: false,
   }),
-  withMethods((store) => ({
-    startStream() {
-      store.streaming.set(true);
 
-      const interval = setInterval(() => {
-        store.logs.set([
-          {
+  withMethods((store) => {
+    let intervalId: ReturnType<typeof setInterval> | null = null;
+
+    return {
+      startStream() {
+        // Evitar múltiples streams simultáneos
+        if (store.streaming()) return;
+
+        patchState(store, { streaming: true });
+
+        intervalId = setInterval(() => {
+          const newLog: LogEntry = {
             id: crypto.randomUUID(),
             level: 'INFO',
             message: 'Simulated log entry',
             service: 'api-gateway',
             timestamp: new Date().toISOString(),
-          },
-          ...store.logs(),
-        ]);
-      }, 1000);
+          };
 
-      setTimeout(() => {
-        clearInterval(interval);
-        store.streaming.set(false);
-      }, 10000);
-    },
-  }))
+          patchState(store, {
+            logs: [newLog, ...store.logs()],
+          });
+        }, 1000);
+
+        // Auto-detener después de 10 segundos
+        setTimeout(() => {
+          this.stopStream();
+        }, 10000);
+      },
+
+      stopStream() {
+        if (intervalId) {
+          clearInterval(intervalId);
+          intervalId = null;
+        }
+        patchState(store, { streaming: false });
+      },
+
+      clearLogs() {
+        patchState(store, { logs: [] });
+      },
+    };
+  })
 );
